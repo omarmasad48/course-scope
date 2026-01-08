@@ -1,6 +1,6 @@
 # CourseScope
 
-A full-stack course review platform for San Diego City College students.
+A full-stack course review platform for San Diego Community College District students.
 
 ## Features
 

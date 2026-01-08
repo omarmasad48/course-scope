@@ -6,7 +6,7 @@ const Home = () => {
       <div style={styles.hero}>
         <h1 style={styles.title}>Welcome to CourseScope</h1>
         <p style={styles.subtitle}>
-          Discover the best courses at San Diego City College through authentic student reviews
+          Discover the best courses at San Diego Community College District through authentic student reviews
         </p>
         <div style={styles.buttons}>
           <Link to="/courses" style={{ ...styles.button, ...styles.primaryButton }}>
@@ -22,7 +22,7 @@ const Home = () => {
         <div style={styles.feature}>
           <h3 style={styles.featureTitle}>Real Student Reviews</h3>
           <p style={styles.featureText}>
-            Read honest reviews from fellow SDCC students about courses, professors, and difficulty
+            Read honest reviews from fellow SDCCD students about courses, professors, and difficulty
           </p>
         </div>
         <div style={styles.feature}>
