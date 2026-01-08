@@ -1,0 +1,152 @@
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    const result = await login(email, password);
+
+    if (result.success) {
+      navigate('/courses');
+    } else {
+      setError(result.error || 'Login failed');
+    }
+
+    setLoading(false);
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2 style={styles.title}>Login to CourseScope</h2>
+
+        {error && <div style={styles.error}>{error}</div>}
+
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={styles.input}
+              placeholder="your.email@sdccd.edu"
+            />
+          </div>
+
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={styles.button}
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
+
+        <p style={styles.footer}>
+          Don't have an account?{' '}
+          <Link to="/register" style={styles.link}>
+            Sign up
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const styles = {
+  container: {
+    maxWidth: '400px',
+    margin: '4rem auto',
+    padding: '0 1rem'
+  },
+  card: {
+    backgroundColor: 'white',
+    padding: '2rem',
+    borderRadius: '0.5rem',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+  },
+  title: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#1e293b',
+    marginBottom: '1.5rem',
+    textAlign: 'center'
+  },
+  error: {
+    backgroundColor: '#fee2e2',
+    color: '#991b1b',
+    padding: '0.75rem',
+    borderRadius: '0.375rem',
+    marginBottom: '1rem',
+    fontSize: '0.9rem'
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem'
+  },
+  formGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem'
+  },
+  label: {
+    fontSize: '0.9rem',
+    fontWeight: '500',
+    color: '#374151'
+  },
+  input: {
+    padding: '0.75rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem',
+    fontSize: '1rem'
+  },
+  button: {
+    backgroundColor: '#2563eb',
+    color: 'white',
+    padding: '0.75rem',
+    borderRadius: '0.375rem',
+    border: 'none',
+    fontSize: '1rem',
+    fontWeight: '500',
+    cursor: 'pointer',
+    marginTop: '0.5rem'
+  },
+  footer: {
+    marginTop: '1.5rem',
+    textAlign: 'center',
+    color: '#64748b',
+    fontSize: '0.9rem'
+  },
+  link: {
+    color: '#2563eb',
+    textDecoration: 'none',
+    fontWeight: '500'
+  }
+};
+
+export default Login;
