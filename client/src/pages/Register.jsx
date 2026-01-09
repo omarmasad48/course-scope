@@ -122,9 +122,9 @@ const Register = () => {
 
 const styles = {
   container: {
-    maxWidth: '500px',
+    maxWidth: '550px',
     margin: '4rem auto',
-    padding: '0 1rem'
+    padding: '0 1.5rem'
   },
   card: {
     backgroundColor: 'white',
